@@ -1,3 +1,4 @@
+//two pointer approach for two sum problem
 package DSA;
 
 public class arrays2 {
