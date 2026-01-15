@@ -11,6 +11,8 @@ You are given an array and you have to left rotate the array specified by K numb
        so basically 7 rotations = Original array
                     8 rotations = Original array(7 rotations) + 1 rotation
         *  so use k=k%n
+    While performing left rotation - negative k indicates right rotation
+       if k is -ve do right rotation or convert -ve k equivalent to left rotation by doing k=k+n
        ------------------------------------------------------------------------------------------------
  Bruteforce Approach :
       * Store the 1st element in a temporary variable.
