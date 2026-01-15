@@ -5,6 +5,13 @@ You are given an array and you have to left rotate the array specified by K numb
       Left rotate array by 1 position : {2, 3, 4, 5, 6, 7, 1}
       Left rotate array by 1 position : {3, 4, 5, 6, 7, 1, 2}
       Left rotate array by 1 position : {4, 5, 6, 7, 1, 2, 3}
+   The size of the above array is 7
+       When we rotate an array either left or right with number of positions equal to the length of the array.
+       we will get the same array again.
+       so basically 7 rotations = Original array
+                    8 rotations = Original array(7 rotations) + 1 rotation
+        *  so use k=k%n
+       ------------------------------------------------------------------------------------------------
  Bruteforce Approach :
       * Store the 1st element in a temporary variable.
       * Now run a loop and move all the array elements one position to the left.
