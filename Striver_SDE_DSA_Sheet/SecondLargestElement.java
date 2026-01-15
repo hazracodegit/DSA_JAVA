@@ -89,6 +89,8 @@
                                        second = largest;
                                        largest = arr[i];
                                      }
+                                     else if(arr[i] > second && arr[i] < largest) {
+                                         second = arr[i];
                                   }
                                 System.out.print("Second Largest Element: "+ second);
                               }
