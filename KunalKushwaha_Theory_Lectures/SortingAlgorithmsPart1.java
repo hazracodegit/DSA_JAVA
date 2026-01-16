@@ -1,5 +1,5 @@
 ### Bubble Sort Algorithm
-  Definition : Bubble Sort is a simple comparison-based Algorithms which repeatedly compares Adjacent elements and 
+  Definition : Bubble Sort is a simple comparison-based Algorithm which repeatedly compares Adjacent elements and 
        swaps them if they are in wrong Order until the entire array becomes sorted.
   * Also known as Sinking Sort or Exchange Sort.
   * In each pass the largest element bubbles up to the end.
