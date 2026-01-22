@@ -1,0 +1,38 @@
+### Binary Search — Complete Explanation
+✅ What is Binary Search?
+
+Binary Search is an efficient searching algorithm used to find an element in a sorted array.
+
+Instead of checking one-by-one like linear search, it:
+👉 Divides the search space into half every step
+
+❗ Condition to Use Binary Search
+
+✅ Array must be sorted (ascending or descending)
+  🧠 Basic Idea
+
+1. Take low and high
+2. Find mid
+3. Compare mid with target
+4. Eliminate half of the array
+  ⏱ Time Complexity
+Case	Time
+Best	O(1)
+Average	O(log n)
+Worst	O(log n)
+Iterative Approach:
+  int binarySearch(int[] arr, int target) {
+    int low = 0, high = arr.length - 1;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2; // prevents overflow
+
+        if (arr[mid] == target)
+            return mid;
+        else if (arr[mid] < target)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1;
+}
