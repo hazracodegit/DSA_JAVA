@@ -1,6 +1,6 @@
 ### First  Occurence 
 Fast  Occurence : The problem Statement states that we are given an array sorted in either ascending
-   or descending Order(can contain duplicates), and a target element will bw given. Now we have to find the first Occurence (Index)
+   or descending Order(can contain duplicates), and a target element will be given. Now we have to find the first Occurence (Index)
     of that target element.
 Example : { 10, 20, 20, 20, 50, 60}  target=20
   Output: 2
