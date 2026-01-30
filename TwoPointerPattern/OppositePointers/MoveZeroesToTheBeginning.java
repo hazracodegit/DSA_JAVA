@@ -6,13 +6,13 @@ Bruteforce Approach : Using an extra space
       int n = nums.length;
     int[] temp = new int[n];
     int index = 0;
-    // Step 1: count zeroes
+   
     for (int i = 0; i < n; i++) {
         if (nums[i] == 0) {
             temp[index++] = 0;
         }
     }
-    // Step 2: add non-zero elements
+    
     for (int i = 0; i < n; i++) {
         if (nums[i] != 0) {
             temp[index++] = nums[i];
@@ -24,11 +24,12 @@ Bruteforce Approach : Using an extra space
 
 Time Complexity : O(2*n)
 Space Complexity : O(n)
+------------------------------------------------------------------------------------------------------
 Optimised Approach : Inplace-modification
-     public static void main(String[] args) {
-	int[] arr={1,2,0,0,0,4,0,1,0,5,0};
-	int index=arr.length-1;
-	for(int i=arr.length-1;i>=0;i--){
+         public static void main(String[] args) {
+	    int[] arr={1,2,0,0,0,4,0,1,0,5,0};
+	    int index=arr.length-1;
+	     for(int i=arr.length-1;i>=0;i--){
 	    if (arr[i]!=0){
 	        arr[index--]=arr[i];
 	    }
@@ -40,3 +41,26 @@ Optimised Approach : Inplace-modification
 	}
 Time Complexity : O(2*n)
 Space Complexity : O(1)
+---------------------------------------------------------------------------------------------------------
+	Without maintaining the order
+	----->               public static void main(String[] args) {
+	                     int[] arr={1,2,0,0,0,4,0,1,0,5,0};
+	                     int index=arr.length-1;
+	                     int start=0;int end=arr.length-1;
+	                     while(start<end){
+	                     if (arr[start]!=0&&arr[end]==0){
+	                       int temp=arr[start];
+	                       arr[start]=arr[end];
+	                       arr[end]=temp;
+	                       start++;end--;
+	                        }
+	                        else if (arr[start]!=0&&arr[end]!=0)
+	                         end--;
+							 else if (arr[start]==0&&arr[end]==0)
+	                         start++;
+	                          else{
+	                         start++;end--;}
+	     
+	                         }
+	                      System.out.print(Arrays.toString(arr));
+	                  }
