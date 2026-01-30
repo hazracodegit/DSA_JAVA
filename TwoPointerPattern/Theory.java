@@ -30,6 +30,9 @@ Basic Idea (Intuition) :
          *  Removing and modifying elements of array in-place.
          *  Linked List cycle / middle element
          *  Mainly used in Arrays/Strings/Linkedlist
+array = {10, 20, 30, 40, 50}
+       ----> the array {10, 30, 50} is known as subsequence
+       ----> the array {10, 20, 30} is known as subarray
 
   Types of Two-pointer Techniques:
          1️⃣ Opposite Direction Pointers (Most Common)
