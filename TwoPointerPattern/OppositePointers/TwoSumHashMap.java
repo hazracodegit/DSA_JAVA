@@ -12,7 +12,7 @@ public class Main
 		        map.put(arr[i],i);
 		    }
 		    else{
-		        System.out.println(i+" "+map.get(diff));
+		        System.out.println(i+" "+map.get(diff)); 
 		        break;
 		    }
 		    
