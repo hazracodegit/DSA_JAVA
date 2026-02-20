@@ -39,6 +39,37 @@ array = {10, 20, 30, 40, 50}
                     both pointers start at opposite ends
          2️⃣ Same Direction Pointers (Fast & Slow)
                     Both pointers move forward, but at different speeds
+
+
+
+---------> Easy Problems
+Remove Occurrences
+Move Zeros To End
+Unique Elements in Sorted Array
+Reverse a string preserving space positions
+Sort an array of 0s, 1s and 2s
+Two Sum
+Pair Sum in a Sorted and Rotated Array
+Closest Pair Sum
+Closest pair from two sorted arrays
+Smallest Subarray > Sum
+Dominant Pairs
+Sentence Palindrome
+Intersection of Arrays with Distinct
+---------> Medium Problems
+Count pairs with absolute difference equal to k
+Triplet Sum in Array
+Sum of Two Equals Third
+K-th element of two Arrays
+Union of 2 Sorted with Duplicates
+Subarrays with Max in Range
+Longest Substring with K Unique
+Remove and Reverse
+The Celebrity Problem
+----------> Hard Problems
+Trapping Rain Water Problem
+4 Sum - Check for Quadruple
+4 Sum – All Distinct Quadruplets with given Sum
   
          
   
