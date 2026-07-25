@@ -60,7 +60,7 @@ class SolutionBruteforce {
     }
 }
 
-
+```java
 
 
 ---
@@ -73,7 +73,7 @@ For the last element, we may have to continue searching from the beginning of th
 
 Instead of actually creating a doubled array, we simply **traverse the array twice** using:
 
-```java
+
 nums[i % n]
 ```
 
