@@ -754,6 +754,7 @@ if (!stack.isEmpty()) {
 
 ---
 
+
 # ⭐ Key Takeaways
 
 - `push()` inserts an element onto the stack.
