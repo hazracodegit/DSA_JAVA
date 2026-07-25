@@ -392,3 +392,375 @@ Think of using a stack when:
 - Access the top using **peek()**.
 - All basic stack operations run in **O(1)** time.
 - Stacks are commonly used in recursion, expression evaluation, browser history, undo/redo operations, DFS, and monotonic stack problems.
+
+# ⚙️ Stack Methods in Java
+
+> This guide covers all the commonly used methods of the `Stack` class in Java with syntax, examples, and time complexities.
+
+---
+
+# 📖 Creating a Stack
+
+```java
+import java.util.Stack;
+
+Stack<Integer> stack = new Stack<>();
+```
+
+---
+
+# 📌 Stack Methods
+
+| Method | Description | Time Complexity |
+|---------|-------------|-----------------|
+| `push()` | Inserts an element at the top | O(1) |
+| `pop()` | Removes and returns the top element | O(1) |
+| `peek()` | Returns the top element without removing it | O(1) |
+| `isEmpty()` | Checks whether the stack is empty | O(1) |
+| `size()` | Returns the number of elements | O(1) |
+| `search()` | Returns the position of an element from the top | O(n) |
+| `clear()` | Removes all elements | O(n) |
+
+---
+
+# 1️⃣ push()
+
+Adds an element to the top of the stack.
+
+### Syntax
+
+```java
+stack.push(element);
+```
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.push(10);
+stack.push(20);
+stack.push(30);
+
+System.out.println(stack);
+```
+
+### Output
+
+```text
+[10, 20, 30]
+```
+
+---
+
+# 2️⃣ pop()
+
+Removes and returns the top element.
+
+### Syntax
+
+```java
+stack.pop();
+```
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.push(10);
+stack.push(20);
+stack.push(30);
+
+System.out.println(stack.pop());
+System.out.println(stack);
+```
+
+### Output
+
+```text
+30
+[10, 20]
+```
+
+---
+
+# 3️⃣ peek()
+
+Returns the top element without removing it.
+
+### Syntax
+
+```java
+stack.peek();
+```
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.push(10);
+stack.push(20);
+stack.push(30);
+
+System.out.println(stack.peek());
+System.out.println(stack);
+```
+
+### Output
+
+```text
+30
+[10, 20, 30]
+```
+
+---
+
+# 4️⃣ isEmpty()
+
+Checks whether the stack is empty.
+
+### Syntax
+
+```java
+stack.isEmpty();
+```
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+System.out.println(stack.isEmpty());
+
+stack.push(10);
+
+System.out.println(stack.isEmpty());
+```
+
+### Output
+
+```text
+true
+false
+```
+
+---
+
+# 5️⃣ size()
+
+Returns the total number of elements in the stack.
+
+### Syntax
+
+```java
+stack.size();
+```
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.push(10);
+stack.push(20);
+stack.push(30);
+
+System.out.println(stack.size());
+```
+
+### Output
+
+```text
+3
+```
+
+---
+
+# 6️⃣ search()
+
+Returns the **1-based position** of an element from the **top** of the stack.
+
+If the element is not present, it returns **-1**.
+
+### Syntax
+
+```java
+stack.search(element);
+```
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.push(10);
+stack.push(20);
+stack.push(30);
+
+System.out.println(stack.search(30));
+System.out.println(stack.search(20));
+System.out.println(stack.search(10));
+System.out.println(stack.search(50));
+```
+
+### Output
+
+```text
+1
+2
+3
+-1
+```
+
+Explanation
+
+```text
+Top
+
+30 ← Position 1
+20 ← Position 2
+10 ← Position 3
+```
+
+---
+
+# 7️⃣ clear()
+
+Removes all elements from the stack.
+
+### Syntax
+
+```java
+stack.clear();
+```
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.push(10);
+stack.push(20);
+stack.push(30);
+
+stack.clear();
+
+System.out.println(stack);
+```
+
+### Output
+
+```text
+[]
+```
+
+---
+
+# 📝 Complete Example
+
+```java
+import java.util.Stack;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Stack<Integer> stack = new Stack<>();
+
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        System.out.println("Stack : " + stack);
+
+        System.out.println("Top : " + stack.peek());
+
+        System.out.println("Size : " + stack.size());
+
+        System.out.println("Search 20 : " + stack.search(20));
+
+        System.out.println("Pop : " + stack.pop());
+
+        System.out.println("Stack : " + stack);
+
+        System.out.println("Is Empty : " + stack.isEmpty());
+
+        stack.clear();
+
+        System.out.println("After Clear : " + stack);
+    }
+}
+```
+
+### Output
+
+```text
+Stack : [10, 20, 30]
+Top : 30
+Size : 3
+Search 20 : 2
+Pop : 30
+Stack : [10, 20]
+Is Empty : false
+After Clear : []
+```
+
+---
+
+# ⚠️ Common Exceptions
+
+## EmptyStackException
+
+Calling `pop()` or `peek()` on an empty stack throws an exception.
+
+### Example
+
+```java
+Stack<Integer> stack = new Stack<>();
+
+stack.pop();
+```
+
+Output
+
+```text
+Exception in thread "main"
+java.util.EmptyStackException
+```
+
+Always check first:
+
+```java
+if (!stack.isEmpty()) {
+    stack.pop();
+}
+```
+
+---
+
+# 🎯 Time Complexity Summary
+
+| Method | Time Complexity |
+|---------|-----------------|
+| `push()` | O(1) |
+| `pop()` | O(1) |
+| `peek()` | O(1) |
+| `isEmpty()` | O(1) |
+| `size()` | O(1) |
+| `search()` | O(n) |
+| `clear()` | O(n) |
+
+---
+
+# ⭐ Key Takeaways
+
+- `push()` inserts an element onto the stack.
+- `pop()` removes and returns the top element.
+- `peek()` returns the top element without removing it.
+- `isEmpty()` checks if the stack contains any elements.
+- `size()` returns the current number of elements.
+- `search()` returns the 1-based position from the top.
+- `clear()` removes every element from the stack.
+- Always check `isEmpty()` before calling `pop()` or `peek()` to avoid `EmptyStackException`.
