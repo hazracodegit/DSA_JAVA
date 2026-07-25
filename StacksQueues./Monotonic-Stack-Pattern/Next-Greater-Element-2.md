@@ -74,7 +74,7 @@ Instead of actually creating a doubled array, we simply **traverse the array twi
 
 
 nums[i % n]
-```
+
 
 The modulo operator (`%`) wraps the index back to the beginning.
 
