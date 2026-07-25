@@ -398,3 +398,178 @@ while(!stack.isEmpty()){
 - Undo/Redo systems maintain a history using stacks.
 - DFS can be implemented using a stack instead of recursion.
 - Recognizing the pattern is often more important than memorizing the code.
+
+ 
+
+Level 1: Basic Stack Operations
+
+1. Implement Stack using Array
+
+
+2. Implement Stack using Linked List
+
+
+3. Implement Stack using Queues
+
+
+4. Design Min Stack
+
+
+
+Level 2: Parentheses Problems
+
+5. Valid Parentheses
+
+
+6. Minimum Add to Make Parentheses Valid
+
+
+7. Remove Outermost Parentheses
+
+
+8. Maximum Nesting Depth of Parentheses
+
+
+9. Longest Valid Parentheses (Hard)
+
+
+
+Level 3: Expression Problems
+
+10. Infix to Postfix
+
+
+11. Infix to Prefix
+
+
+12. Postfix Evaluation
+
+
+13. Prefix Evaluation
+
+
+14. Postfix to Infix
+
+
+15. Prefix to Infix
+
+
+
+Level 4: Monotonic Stack
+
+16. Next Greater Element I
+
+
+17. Next Greater Element II
+
+
+18. Previous Greater Element
+
+
+19. Next Smaller Element
+
+
+20. Previous Smaller Element
+
+
+21. Daily Temperatures
+
+
+22. Stock Span Problem
+
+
+
+Level 5: Histogram & Matrix
+
+23. Largest Rectangle in Histogram
+
+
+24. Maximal Rectangle
+
+
+25. Trapping Rain Water (Stack approach)
+
+
+
+Level 6: Advanced Stack Problems
+
+26. Asteroid Collision
+
+
+27. Remove K Digits
+
+
+28. Decode String
+
+
+29. Simplify Path
+
+
+30. Basic Calculator
+
+
+31. Score of Parentheses
+
+
+32. Online Stock Span
+
+
+
+Level 7: Hard Problems
+
+33. Car Fleet
+
+
+34. Sum of Subarray Minimums
+
+
+35. Sum of Subarray Ranges
+
+
+36. 132 Pattern
+
+
+37. Remove Duplicate Letters
+
+
+38. Exclusive Time of Functions
+
+
+
+
+---
+
+Recommended order for interviews
+
+1. ✅ Implement Stack
+
+
+2. ✅ Min Stack
+
+
+3. ✅ Valid Parentheses
+
+
+4. ✅ Next Greater Element I
+
+
+5. ✅ Daily Temperatures
+
+
+6. ✅ Stock Span
+
+
+7. ✅ Largest Rectangle in Histogram
+
+
+8. ✅ Trapping Rain Water
+
+
+9. ✅ Asteroid Collision
+
+
+10. ✅ Sum of Subarray Minimums
+
+
+
+
