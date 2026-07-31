@@ -18,6 +18,28 @@
 
 ---
 
+---
+
+# 📖 Important Problems
+
+1. Check for Balanced Parenthesis
+2. Infix, Postfix, Prefix Conversion
+3. Expression Conversion & Evaluation
+4. Implement min Stack
+5. Next Greater Element-1
+6. Next Greater Element-2
+7. Previous Smaller Element
+8. Sum of Subarray minimum
+9. Sum of Subarray ranges
+10. Aestroid Collision
+11. Largest Rectangle in Histogram
+12. Maximal Rectangle
+13. Remove k digits
+14. Stock Span Problem
+15. The Celebrity Problem
+16. LRU Cache
+---
+
 # 1️⃣ Balanced Parentheses Pattern
 
 ## 💡 Idea
