@@ -603,3 +603,685 @@ java CustomLinkedList
 # 👨‍💻 Author
 
 Created as a Data Structures learning project using Java.
+
+
+
+
+# Custom Singly Linked List in Java (Static Inner Node Class)
+
+## 📌 Overview
+
+This project demonstrates the implementation of a **custom Singly Linked List** in Java without using Java's built-in `LinkedList` class.
+
+The Linked List is implemented using a **Static Inner Node Class**, where the `Node` class is declared inside the main `CustomLinkedList` class.
+
+This project covers:
+
+- Node creation
+- Static inner classes
+- Linked list traversal
+- Insertion operations
+- Deletion operations
+- Time complexity analysis
+
+---
+
+# 📂 Project Structure
+
+```
+CustomLinkedList.java
+
+CustomLinkedList
+│
+├── head
+│
+├── Node (Static Inner Class)
+│   ├── data
+│   └── next
+│
+├── insertAtBeginning()
+├── insertAtEnd()
+├── insertAtPosition()
+├── deleteAtBeginning()
+├── deleteAtEnd()
+├── deleteAtPosition()
+└── display()
+```
+
+---
+
+# 🔗 What is a Linked List?
+
+A linked list is a linear data structure where elements are stored in nodes.
+
+Each node contains:
+
+1. **Data** - Stores the value.
+2. **Next** - Stores the reference of the next node.
+
+Example:
+
+```
+Head
+ |
+ v
+
++------+-------+      +------+-------+      +------+------+
+| 10   | next  | ---> | 20   | next  | ---> | 30   | null |
++------+-------+      +------+-------+      +------+------+
+```
+
+---
+
+# 🌟 Static Inner Node Class
+
+## What is it?
+
+Instead of creating a separate Node class:
+
+```java
+class Node {
+    int data;
+    Node next;
+}
+```
+
+we define Node inside the LinkedList class:
+
+```java
+class CustomLinkedList {
+
+    static class Node {
+
+        int data;
+        Node next;
+
+        Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+}
+```
+
+---
+
+## Why use static Node class?
+
+A normal inner class requires an object of the outer class.
+
+Example:
+
+```java
+CustomLinkedList list = new CustomLinkedList();
+
+Node node = list.new Node(10);
+```
+
+But a static inner class does not depend on an outer class object.
+
+We can directly create:
+
+```java
+Node node = new Node(10);
+```
+
+Advantages:
+
+- Cleaner implementation
+- No unnecessary reference to outer class
+- Better memory usage
+- Common approach in DSA problems
+
+---
+
+# 💻 Complete Program
+
+```java
+public class CustomLinkedList {
+
+
+    Node head;
+
+
+    static class Node {
+
+        int data;
+        Node next;
+
+
+        Node(int data){
+
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+
+
+    static CustomLinkedList list = new CustomLinkedList();
+
+
+
+    void insertAtBeginning(int value){
+
+        Node newNode = new Node(value);
+
+
+        if(head == null){
+
+            head = newNode;
+        }
+
+        else{
+
+            newNode.next = head;
+            head = newNode;
+        }
+    }
+
+
+
+    void insertAtEnd(int value){
+
+        Node newNode = new Node(value);
+
+
+        if(head == null){
+
+            head = newNode;
+            return;
+        }
+
+
+        Node temp = head;
+
+
+        while(temp.next != null){
+
+            temp = temp.next;
+        }
+
+
+        temp.next = newNode;
+    }
+
+
+
+    void insertAtPosition(int value,int pos){
+
+        if(pos == 0){
+
+            insertAtBeginning(value);
+            return;
+        }
+
+
+        Node newNode = new Node(value);
+
+        Node temp = head;
+
+
+        for(int i=0;i<pos-1;i++){
+
+            if(temp == null){
+
+                System.out.println("Invalid Position");
+                return;
+            }
+
+            temp=temp.next;
+        }
+
+
+        newNode.next=temp.next;
+        temp.next=newNode;
+    }
+
+
+
+    void deleteAtBeginning(){
+
+        if(head == null){
+
+            System.out.println("List is empty");
+            return;
+        }
+
+
+        head=head.next;
+    }
+
+
+
+    void deleteAtEnd(){
+
+        if(head == null){
+
+            System.out.println("List is empty");
+            return;
+        }
+
+
+        if(head.next == null){
+
+            head=null;
+            return;
+        }
+
+
+        Node temp=head;
+
+
+        while(temp.next.next != null){
+
+            temp=temp.next;
+        }
+
+
+        temp.next=null;
+    }
+
+
+
+    void deleteAtPosition(int pos){
+
+        if(head == null){
+
+            System.out.println("List is empty");
+            return;
+        }
+
+
+        if(pos == 0){
+
+            head=head.next;
+            return;
+        }
+
+
+        Node temp=head;
+
+
+        for(int i=0;i<pos-1;i++){
+
+            if(temp.next == null){
+
+                System.out.println("Invalid Position");
+                return;
+            }
+
+            temp=temp.next;
+        }
+
+
+        if(temp.next == null){
+
+            System.out.println("Invalid Position");
+            return;
+        }
+
+
+        temp.next=temp.next.next;
+    }
+
+
+
+    void display(){
+
+        Node temp=head;
+
+
+        while(temp != null){
+
+            System.out.print(temp.data+" ");
+
+            temp=temp.next;
+        }
+    }
+
+
+
+    public static void main(String args[]){
+
+
+        list.insertAtBeginning(10);
+
+        list.insertAtEnd(20);
+
+        list.insertAtBeginning(30);
+
+        list.insertAtEnd(40);
+
+        list.insertAtPosition(25,2);
+
+
+        list.deleteAtBeginning();
+
+        list.deleteAtEnd();
+
+        list.deleteAtPosition(1);
+
+
+        list.display();
+    }
+}
+```
+
+---
+
+# ⚙️ Operations Explanation
+
+---
+
+# 1. Insert at Beginning
+
+### Method
+
+```java
+insertAtBeginning(value);
+```
+
+### Steps
+
+1. Create a new node.
+2. If list is empty, make it the head.
+3. Otherwise:
+   - Point new node to current head.
+   - Update head.
+
+Example:
+
+Before:
+
+```
+10 → 20 → 30
+```
+
+Insert 5:
+
+After:
+
+```
+5 → 10 → 20 → 30
+```
+
+Complexity:
+
+```
+Time: O(1)
+Space: O(1)
+```
+
+---
+
+# 2. Insert at End
+
+### Method
+
+```java
+insertAtEnd(value);
+```
+
+### Steps
+
+1. Create a new node.
+2. Traverse to the last node.
+3. Connect the last node with the new node.
+
+Example:
+
+Before:
+
+```
+10 → 20 → 30
+```
+
+Insert 40:
+
+After:
+
+```
+10 → 20 → 30 → 40
+```
+
+Complexity:
+
+```
+Time: O(n)
+Space: O(1)
+```
+
+---
+
+# 3. Insert at Position
+
+### Method
+
+```java
+insertAtPosition(value,position);
+```
+
+### Steps
+
+1. Reach the node before the required position.
+2. Connect the new node with the next node.
+3. Connect previous node with new node.
+
+Example:
+
+Before:
+
+```
+10 → 20 → 40
+```
+
+Insert 30 at position 2:
+
+After:
+
+```
+10 → 20 → 30 → 40
+```
+
+Complexity:
+
+```
+Time: O(n)
+Space: O(1)
+```
+
+---
+
+# 4. Delete at Beginning
+
+### Method
+
+```java
+deleteAtBeginning();
+```
+
+### Steps
+
+1. Move head to the next node.
+2. The old first node becomes unused.
+
+Example:
+
+Before:
+
+```
+10 → 20 → 30
+```
+
+After:
+
+```
+20 → 30
+```
+
+Complexity:
+
+```
+Time: O(1)
+```
+
+---
+
+# 5. Delete at End
+
+### Method
+
+```java
+deleteAtEnd();
+```
+
+### Steps
+
+1. Traverse to second last node.
+2. Set its next reference to null.
+
+Example:
+
+Before:
+
+```
+10 → 20 → 30
+```
+
+After:
+
+```
+10 → 20
+```
+
+Complexity:
+
+```
+Time: O(n)
+```
+
+---
+
+# 6. Delete at Position
+
+### Method
+
+```java
+deleteAtPosition(position);
+```
+
+### Steps
+
+1. Traverse to previous node.
+2. Skip the target node.
+3. Update links.
+
+Example:
+
+Before:
+
+```
+10 → 20 → 30 → 40
+```
+
+Delete position 2:
+
+After:
+
+```
+10 → 20 → 40
+```
+
+Complexity:
+
+```
+Time: O(n)
+```
+
+---
+
+# 7. Display Linked List
+
+### Method
+
+```java
+display();
+```
+
+### Steps
+
+1. Start from head.
+2. Print current node.
+3. Move to next node.
+4. Continue until null.
+
+Complexity:
+
+```
+Time: O(n)
+```
+
+---
+
+# 📊 Complexity Table
+
+| Operation | Time Complexity | Space Complexity |
+|---|---|---|
+| Insert Beginning | O(1) | O(1) |
+| Insert End | O(n) | O(1) |
+| Insert Position | O(n) | O(1) |
+| Delete Beginning | O(1) | O(1) |
+| Delete End | O(n) | O(1) |
+| Delete Position | O(n) | O(1) |
+| Display | O(n) | O(1) |
+
+---
+
+# ▶️ How to Run
+
+Compile:
+
+```bash
+javac CustomLinkedList.java
+```
+
+Run:
+
+```bash
+java CustomLinkedList
+```
+
+---
+
+# 📚 Concepts Covered
+
+- Static Inner Classes
+- Classes and Objects
+- References
+- Dynamic Data Structures
+- Singly Linked Lists
+- Node Manipulation
+- Insertion
+- Deletion
+- Traversal
+- Big-O Analysis
+
+---
+
+# 🚀 Future Improvements
+
+- Search operation
+- Reverse linked list
+- Find middle node
+- Detect cycle
+- Remove duplicates
+- Generic Linked List
+- Doubly Linked List
+- Circular Linked List
+
+---
+
+# 👨‍💻 Author
+
+Created as a Data Structures and Algorithms learning project using Java.
