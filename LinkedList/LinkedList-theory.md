@@ -4,6 +4,8 @@
 
 A **Linked List** is a linear data structure where elements are stored in individual objects called **nodes**. Each node contains:
 
+** A Linked List is also a collection of nodes. **
+
 1. **Data** - The value stored in the node.
 2. **Reference (Pointer)** - A link to the next node in the sequence.
 
