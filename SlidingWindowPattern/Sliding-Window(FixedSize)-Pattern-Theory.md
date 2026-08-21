@@ -746,16 +746,49 @@ newSum = oldSum - leavingElement + enteringElement
 ```
 
  # Algorithm
-Initialize windowSum = 0.
-Calculate the sum of the first k elements.
-Store this sum as the initial maxSum.
-Start a loop from index k to n - 1.
-For every new element:
-Remove the element that is leaving the window: arr[right - k].
-Add the new element entering the window: arr[right].
-Update maxSum.
-Continue until right reaches the end of the array.
-Return maxSum.
+# Fixed-Size Sliding Window Algorithm
+
+## Steps
+
+1. **Initialize the variables**
+   - Set `windowSum = 0`.
+   - Set `maxSum` after calculating the first window.
+
+2. **Build the first window**
+   - Add the first `k` elements of the array.
+   - This gives the sum of the first window.
+
+3. **Initialize the answer**
+   - Set `maxSum = windowSum`.
+
+4. **Start sliding the window**
+   - Start from `right = k`.
+   - Continue until `right < n`.
+
+5. **Remove the element leaving the window**
+   - The leaving element is:
+   ```text
+   arr[right - k]
+
+
+
+
+
+
+Core Idea
+Build First Window
+        ↓
+Remove Leaving Element
+        ↓
+Add Entering Element
+        ↓
+Update Answer
+        ↓
+Slide Again
+
+Complexity
+Time Complexity  : O(n)
+Space Complexity : O(1)
 
 ---
 
