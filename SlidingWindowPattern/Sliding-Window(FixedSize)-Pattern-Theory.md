@@ -771,10 +771,29 @@ newSum = oldSum - leavingElement + enteringElement
    arr[right - k]
 
 
+Add the element entering the window
+
+The entering element is:
+arr[right]
 
 
+Update the window sum
+
+windowSum = windowSum - arr[right - k] + arr[right]
 
 
+Update the answer
+
+Compare the current windowSum with maxSum.
+Store the larger value.
+
+Repeat
+
+Continue steps 5–8 until the window reaches the end of the array.
+
+Return the answer
+
+maxSum contains the maximum sum of any window of size k.
 Core Idea
 Build First Window
         ↓
@@ -789,6 +808,7 @@ Slide Again
 Complexity
 Time Complexity  : O(n)
 Space Complexity : O(1)
+
 
 ---
 
