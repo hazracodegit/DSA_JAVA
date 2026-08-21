@@ -767,7 +767,7 @@ newSum = oldSum - leavingElement + enteringElement
 
 5. **Remove the element leaving the window**
    - The leaving element is:
-   ```text
+   
    arr[right - k]
 
 
