@@ -745,6 +745,18 @@ The main formula is:
 newSum = oldSum - leavingElement + enteringElement
 ```
 
+ # Algorithm
+Initialize windowSum = 0.
+Calculate the sum of the first k elements.
+Store this sum as the initial maxSum.
+Start a loop from index k to n - 1.
+For every new element:
+Remove the element that is leaving the window: arr[right - k].
+Add the new element entering the window: arr[right].
+Update maxSum.
+Continue until right reaches the end of the array.
+Return maxSum.
+
 ---
 
 # 15. Complete Optimized Java Code
