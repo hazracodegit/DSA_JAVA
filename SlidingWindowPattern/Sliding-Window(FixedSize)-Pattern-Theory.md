@@ -745,57 +745,52 @@ The main formula is:
 newSum = oldSum - leavingElement + enteringElement
 ```
 
- # Algorithm
 # Fixed-Size Sliding Window Algorithm
 
-## Steps
+## Algorithm Steps
 
-1. **Initialize the variables**
-   - Set `windowSum = 0`.
-   - Set `maxSum` after calculating the first window.
+1. Initialize `windowSum = 0`.
 
-2. **Build the first window**
-   - Add the first `k` elements of the array.
-   - This gives the sum of the first window.
+2. Calculate the sum of the first `k` elements.
 
-3. **Initialize the answer**
-   - Set `maxSum = windowSum`.
+3. Store the first window's sum in `maxSum`.
 
-4. **Start sliding the window**
-   - Start from `right = k`.
-   - Continue until `right < n`.
+4. Start the sliding process from index `k`.
 
-5. **Remove the element leaving the window**
-   - The leaving element is:
+5. Remove the element that is leaving the window:
    
    arr[right - k]
 
+6. Add the new element entering the window:
 
-Add the element entering the window
+   arr[right]
 
-The entering element is:
-arr[right]
+7. Update the window sum:
 
-
-Update the window sum
-
-windowSum = windowSum - arr[right - k] + arr[right]
+       windowSum = windowSum - arr[right - k] + arr[right];
 
 
-Update the answer
+8. Compare the current windowSum with maxSum and update maxSum.
 
-Compare the current windowSum with maxSum.
-Store the larger value.
+9. Continue sliding the window until right reaches the end of the array.
 
-Repeat
+10. Return maxSum as the final answer.
 
-Continue steps 5–8 until the window reaches the end of the array.
+Core Formula
+New Window Sum
+=
+Old Window Sum
+- Element Leaving
++ Element Entering
 
-Return the answer
+windowSum = windowSum - arr[right - k] + arr[right];
 
-maxSum contains the maximum sum of any window of size k.
-Core Idea
+Flow
 Build First Window
+        ↓
+Calculate Sum
+        ↓
+Store Answer
         ↓
 Remove Leaving Element
         ↓
@@ -803,11 +798,15 @@ Add Entering Element
         ↓
 Update Answer
         ↓
-Slide Again
+Slide Window
+        ↓
+Repeat
 
 Complexity
 Time Complexity  : O(n)
 Space Complexity : O(1)
+
+
 
 
 ---
