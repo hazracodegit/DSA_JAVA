@@ -1,50 +1,39 @@
-Java Strings — Complete Guide
-
-Complete notes on Java String, String methods, String Constant Pool, immutability, StringBuilder, StringBuffer, memory management, coding examples, and interview questions.
-
-Table of Contents
-1. Introduction to String
-2. Creating Strings
-3. String Immutability
-4. String Constant Pool
-5. String Comparison
-6. Important String Methods
-7. Searching Methods
-8. Extracting and Modifying Strings
-9. String Conversion
-10. StringBuilder
-11. StringBuffer
-12. String vs StringBuilder vs StringBuffer
-13. Memory and Performance
-14. Unicode and Characters
-15. Common String Programs
-16. Interview Questions
-17. Common Mistakes
-18. Quick Revision
-1. Introduction to String
+📘 Java Strings — Complete Guide
+Complete Java Strings Notes: Theory, String Methods, String Constant Pool, Immutability, StringBuilder, StringBuffer, Memory Management, Examples, and Interview Questions.
+📑 Table of Contents
+Introduction to Strings
+Creating Strings
+String Immutability
+String Constant Pool
+String Comparison
+Important String Methods
+Searching Methods
+Extracting and Modifying Strings
+String Conversion
+StringBuilder
+StringBuffer
+String vs StringBuilder vs StringBuffer
+Memory Management and Performance
+Unicode and Characters
+Common String Programs
+Interview Questions
+Common Mistakes
+Quick Revision
+1. Introduction to Strings
 
 A String is a sequence of characters used to represent text.
 
-In Java, String is a class available in the java.lang package.
+In Java, String is a predefined class available in the java.lang package.
 
-String name = "Java";
-String message = "Hello World";
-String empty = "";
-
-Important properties
-String is a class, not a primitive data type.
-String objects are immutable.
-Strings can be created using literals or constructors.
-String literals can share objects through the String Constant Pool.
-String provides methods for searching, comparing, extracting, and transforming text.
-String uses UTF-16 internally as its conceptual character representation.
 Example
 public class Main {
     public static void main(String[] args) {
-        String language = "Java";
+        String name = "Java";
+        String message = "Hello World";
 
-        System.out.println(language);
-        System.out.println(language.length());
+        System.out.println(name);
+        System.out.println(message);
+        System.out.println(name.length());
     }
 }
 
@@ -52,265 +41,366 @@ public class Main {
 Output:
 
 Java
+Hello World
 4
 
+Important Properties of String
+String is a class, not a primitive data type.
+String is immutable, meaning its contents cannot be changed after creation.
+Strings can be created using literals or constructors.
+String literals can share objects through the String Constant Pool.
+String provides methods for searching, comparing, extracting, and modifying text by returning new Strings.
+String supports Unicode text.
 2. Creating Strings
-2.1 Using a String literal
+
+Java provides multiple ways to create String objects.
+
+2.1 Using a String Literal
 String s1 = "Java";
 String s2 = "Java";
 
-System.out.println(s1 == s2); // true
+System.out.println(s1 == s2);
 
 
-Identical String literals are interned and can refer to the same pooled object.
+Output:
 
-2.2 Using the new keyword
+true
+
+
+Explanation: Identical String literals are interned, so both variables can refer to the same pooled object.
+
+2.2 Using the new Keyword
 String s1 = new String("Java");
 String s2 = new String("Java");
 
-System.out.println(s1 == s2);      // false
-System.out.println(s1.equals(s2)); // true
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
 
 
-Each explicit constructor call creates a distinct String object.
+Output:
 
-2.3 From a character array
+false
+true
+
+
+Explanation:
+
+== compares object references.
+equals() compares String contents.
+Each explicit new String(...) creates a distinct String object.
+2.3 Creating a String from a Character Array
 char[] chars = {'J', 'a', 'v', 'a'};
+
 String s = new String(chars);
 
-System.out.println(s); // Java
+System.out.println(s);
 
-2.4 From a byte array
+
+Output: Java
+
+2.4 Creating a String from a Byte Array
 import java.nio.charset.StandardCharsets;
 
 byte[] data = {65, 66, 67};
 
 String s = new String(data, StandardCharsets.UTF_8);
 
-System.out.println(s); // ABC
+System.out.println(s);
 
 
-Specify a charset when converting bytes to text.
+Output: ABC
 
-2.5 Empty String
+Best Practice: Always specify a charset when converting bytes into text.
+
+2.5 Creating an Empty String
 String s1 = "";
 String s2 = new String();
 
-System.out.println(s1.isEmpty()); // true
-System.out.println(s2.length());  // 0
+System.out.println(s1.isEmpty());
+System.out.println(s2.length());
+
+
+Output:
+
+true
+0
 
 3. String Immutability
 
-Immutability means that an object's contents cannot be changed after creation.
+Immutability means that an object's contents cannot be changed after it has been created.
 
-Java String objects are immutable.
+In Java, String objects are immutable.
 
+Example
 String s = "Hello";
 
 s.concat(" World");
 
-System.out.println(s); // Hello
+System.out.println(s);
 
 
-The concat() method returns a new String. It does not modify the original String.
+Output:
 
-Correct usage:
+Hello
 
+
+Why? The concat() method returns a new String instead of modifying the original String.
+
+Correct Approach
 String s = "Hello";
 
 s = s.concat(" World");
 
-System.out.println(s); // Hello World
+System.out.println(s);
 
-Another example
+
+Output: Hello World
+
+Another Example
 String s = "java";
 
 s.toUpperCase();
 
-System.out.println(s); // java
+System.out.println(s);
 
 s = s.toUpperCase();
 
-System.out.println(s); // JAVA
+System.out.println(s);
 
-Why is String immutable?
-Security: Text used in paths, class names, and configuration values cannot be modified through an existing String reference.
+
+Output:
+
+java
+JAVA
+
+Why Is String Immutable?
+Security: Strings used in file paths, class names, and configuration values cannot be modified through an existing String reference.
 String Pool: Immutable objects can safely be shared.
-Thread safety: String contents cannot be modified after construction.
-Hashing: Hash codes can be cached because contents do not change.
-Predictability: Methods can receive Strings without changing the original text.
-Important interview point
-
-The variable can be reassigned, but the String object itself cannot be modified.
-
-String s = "Hello";
-s = "World";
-
-
-The variable now refers to "World". The original String was not modified.
-
+Thread Safety: String contents cannot be modified after construction.
+Hashing: Hash codes can be cached because String contents never change.
+Predictability: Methods can receive Strings without changing their original contents.
+Interview Point: A String variable can be reassigned, but the String object itself cannot be modified.
 4. String Constant Pool
 
 The String Constant Pool is a pool of canonical String instances maintained by the JVM.
 
-Example 1: String literals
+String literals with identical contents can share the same pooled object.
+
+Example 1: String Literals
 String a = "Java";
 String b = "Java";
 
-System.out.println(a == b); // true
+System.out.println(a == b);
 
 
-Both references can point to the same pooled object.
+Output: true
 
-Example 2: Using new
+Example 2: String Literal vs Constructor
 String a = "Java";
 String b = new String("Java");
 
-System.out.println(a == b);      // false
-System.out.println(a.equals(b)); // true
+System.out.println(a == b);
+System.out.println(a.equals(b));
 
 
-The literal refers to the pooled String, while the constructor creates a distinct object.
+Output:
 
-Example 3: The intern() method
+false
+true
 
-The intern() method returns the canonical pooled String with matching contents.
+Example 3: The intern() Method
+
+The intern() method returns the canonical pooled String for matching contents.
 
 String a = new String("Java");
 String b = a.intern();
 String c = "Java";
 
-System.out.println(b == c); // true
-
-Conceptual diagram
-String Constant Pool
-        |
-        v
-    "Java" object
-       ^   ^
-       |   |
-       a   c
+System.out.println(b == c);
 
 
-For new String("Java"), the new String object is separate from the pooled String.
+Output: true
 
+Conceptual Diagram
+            String Constant Pool
+                     |
+                     v
+                "Java" Object
+                  ^      ^
+                  |      |
+                  b      c
+
+    a ---> Separate String Object
+
+
+Remember:
+
+String literals can use the String Constant Pool.
+new String("Java") creates a distinct String object.
+intern() returns the canonical pooled String.
 5. String Comparison
-5.1 ==
+
+Java provides several methods to compare Strings.
+
+5.1 == Operator
 
 Checks whether two references point to the same object.
 
 String a = "Java";
 String b = new String("Java");
 
-System.out.println(a == b); // false
+System.out.println(a == b);
 
-5.2 equals()
 
-Compares String contents.
+Output: false
+
+5.2 equals() Method
+
+Compares the contents of two Strings.
 
 String a = "Java";
 String b = new String("Java");
 
-System.out.println(a.equals(b)); // true
+System.out.println(a.equals(b));
+
+
+Output: true
 
 5.3 equalsIgnoreCase()
 
-Compares text without considering case differences.
+Compares Strings without considering case differences.
 
-System.out.println("JAVA".equalsIgnoreCase("java")); // true
+System.out.println("JAVA".equalsIgnoreCase("java"));
+
+
+Output: true
 
 5.4 compareTo()
 
 Compares Strings lexicographically.
 
-System.out.println("Apple".compareTo("Banana") < 0); // true
-System.out.println("Java".compareTo("Java"));        // 0
-System.out.println("Zoo".compareTo("Apple") > 0);    // true
+System.out.println("Apple".compareTo("Banana") < 0);
+System.out.println("Java".compareTo("Java"));
+System.out.println("Zoo".compareTo("Apple") > 0);
 
 
-Return value:
+Output:
 
-Negative: the first String comes before the second.
-Zero: both Strings compare equally.
-Positive: the first String comes after the second.
+true
+0
+true
 
-The result is not necessarily -1, 0, or 1.
+Return Value	Meaning
+Negative	First String comes before the second
+Zero	Both Strings compare equally
+Positive	First String comes after the second
+
+Important: compareTo() does not necessarily return exactly -1, 0, or 1.
 
 5.5 compareToIgnoreCase()
-System.out.println("java".compareToIgnoreCase("JAVA")); // 0
+System.out.println("java".compareToIgnoreCase("JAVA"));
 
-5.6 Null-safe comparison
+
+Output: 0
+
+5.6 Null-Safe Comparison
 import java.util.Objects;
 
 String a = null;
 String b = "Java";
 
-System.out.println(Objects.equals(a, b)); // false
+System.out.println(Objects.equals(a, b));
+
+
+Output: false
+
+Best Practice: Use equals() for String content comparison and Objects.equals() when either reference might be null.
 
 6. Important String Methods
 
-Assume:
+Assume the following String:
 
 String s = "Hello Java";
 
-Method	Description
-length()	Returns the number of UTF-16 code units
-isEmpty()	Checks whether the String has length zero
-isBlank()	Checks whether it is empty or whitespace-only (Java 11+)
-charAt(index)	Returns a UTF-16 code unit at an index
-equals(str)	Compares contents
-equalsIgnoreCase(str)	Compares without case sensitivity
-toUpperCase()	Converts to uppercase
-toLowerCase()	Converts to lowercase
-trim()	Removes leading and trailing characters at or below U+0020
-strip()	Removes leading and trailing Unicode whitespace (Java 11+)
-concat(str)	Concatenates Strings
-contains(seq)	Checks whether a sequence exists
-startsWith(prefix)	Checks the prefix
-endsWith(suffix)	Checks the suffix
-indexOf(x)	Finds the first matching index
-lastIndexOf(x)	Finds the last matching index
-substring(start)	Extracts from an index to the end
-substring(start, end)	Extracts a range; end is exclusive
-replace(old, new)	Replaces literal characters or sequences
-replaceAll(regex, replacement)	Replaces regex matches
-replaceFirst(regex, replacement)	Replaces the first regex match
-split(regex)	Splits using a regular expression
-toCharArray()	Converts to a character array
-toString()	Returns the String itself
-repeat(n)	Repeats text (Java 11+)
-matches(regex)	Checks whether the entire String matches a regex
-intern()	Returns the canonical pooled String
+Method	Description	Example
+length()	Returns UTF-16 code-unit count	s.length()
+isEmpty()	Checks whether length is zero	"".isEmpty()
+isBlank()	Checks whether empty or whitespace-only	" ".isBlank()
+charAt(i)	Returns a code unit at an index	s.charAt(0)
+equals(str)	Compares contents	s.equals("Hello Java")
+equalsIgnoreCase(str)	Compares without case sensitivity	"JAVA".equalsIgnoreCase("java")
+toUpperCase()	Converts to uppercase	s.toUpperCase()
+toLowerCase()	Converts to lowercase	s.toLowerCase()
+trim()	Removes certain leading/trailing characters	s.trim()
+strip()	Removes Unicode whitespace at both ends	s.strip()
+concat(str)	Concatenates Strings	s.concat("!")
+contains(seq)	Checks for a sequence	s.contains("Java")
+startsWith(prefix)	Checks the prefix	s.startsWith("Hello")
+endsWith(suffix)	Checks the suffix	s.endsWith("Java")
+indexOf(x)	Finds the first occurrence	s.indexOf("Java")
+lastIndexOf(x)	Finds the last occurrence	s.lastIndexOf("a")
+substring(a)	Extracts from an index	s.substring(6)
+substring(a, b)	Extracts a range	s.substring(0, 5)
+replace(old, new)	Replaces literal text	s.replace("Java", "Python")
+replaceAll(regex, new)	Replaces regex matches	s.replaceAll("\\s+", "")
+replaceFirst(regex, new)	Replaces the first regex match	s.replaceFirst("Java", "Python")
+split(regex)	Splits using a regex	s.split(" ")
+toCharArray()	Converts to a character array	s.toCharArray()
+repeat(n)	Repeats text	"Hi".repeat(3)
+matches(regex)	Tests the entire String against a regex	"123".matches("\\d+")
+intern()	Returns the canonical pooled String	s.intern()
+
+Version Note: isBlank(), strip(), and repeat() require Java 11 or later.
+
 6.1 length()
 String s = "Programming";
 
-System.out.println(s.length()); // 11
+System.out.println(s.length());
+
+
+Output: 11
 
 6.2 charAt()
 String s = "Java";
 
-System.out.println(s.charAt(0)); // J
-System.out.println(s.charAt(2)); // v
+System.out.println(s.charAt(0));
+System.out.println(s.charAt(2));
 
 
-Valid indices range from 0 to length() - 1.
+Output:
 
-6.3 isEmpty() and isBlank()
+J
+v
+
+6.3 isEmpty() vs isBlank()
 String a = "";
 String b = "   ";
 
-System.out.println(a.isEmpty()); // true
-System.out.println(b.isEmpty()); // false
-System.out.println(b.isBlank()); // true, Java 11+
+System.out.println(a.isEmpty());
+System.out.println(b.isEmpty());
+System.out.println(b.isBlank());
 
-6.4 trim() and strip()
+
+Output:
+
+true
+false
+true
+
+6.4 trim() vs strip()
 String s = "   Java   ";
 
-System.out.println(s.trim());  // Java
-System.out.println(s.strip()); // Java
+System.out.println(s.trim());
+System.out.println(s.strip());
 
 
-strip() is useful when Unicode whitespace handling is required.
+Output:
+
+Java
+Java
+
+
+strip() is preferable when Unicode whitespace handling is required.
 
 6.5 concat()
 String a = "Hello";
@@ -318,38 +408,60 @@ String b = "World";
 
 String result = a.concat(" ").concat(b);
 
-System.out.println(result); // Hello World
+System.out.println(result);
+
+
+Output: Hello World
 
 6.6 contains()
 String s = "I love Java";
 
-System.out.println(s.contains("Java"));   // true
-System.out.println(s.contains("Python")); // false
+System.out.println(s.contains("Java"));
+System.out.println(s.contains("Python"));
+
+
+Output:
+
+true
+false
 
 6.7 startsWith() and endsWith()
 String file = "notes.txt";
 
-System.out.println(file.startsWith("notes")); // true
-System.out.println(file.endsWith(".txt"));    // true
+System.out.println(file.startsWith("notes"));
+System.out.println(file.endsWith(".txt"));
+
+
+Output:
+
+true
+true
 
 6.8 repeat()
-
-Available since Java 11.
-
 System.out.println("Java ".repeat(3));
-// Java Java Java
+
+
+Output: Java Java Java
 
 7. Searching Methods
 7.1 indexOf()
 
-Returns the first matching index, or -1 if not found.
+Returns the first matching index or -1 if the value is not found.
 
 String s = "banana";
 
-System.out.println(s.indexOf('a'));     // 1
-System.out.println(s.indexOf("ana"));   // 1
-System.out.println(s.indexOf('z'));     // -1
-System.out.println(s.indexOf('a', 2));  // 3
+System.out.println(s.indexOf('a'));
+System.out.println(s.indexOf("ana"));
+System.out.println(s.indexOf('z'));
+System.out.println(s.indexOf('a', 2));
+
+
+Output:
+
+1
+1
+-1
+3
 
 7.2 lastIndexOf()
 
@@ -357,15 +469,27 @@ Returns the last matching index.
 
 String s = "banana";
 
-System.out.println(s.lastIndexOf('a'));   // 5
-System.out.println(s.lastIndexOf("ana")); // 3
+System.out.println(s.lastIndexOf('a'));
+System.out.println(s.lastIndexOf("ana"));
+
+
+Output:
+
+5
+3
 
 7.3 matches()
 
 Checks whether the entire String matches a regular expression.
 
-System.out.println("12345".matches("\\d+"));  // true
-System.out.println("123abc".matches("\\d+")); // false
+System.out.println("12345".matches("\\d+"));
+System.out.println("123abc".matches("\\d+"));
+
+
+Output:
+
+true
+false
 
 7.4 regionMatches()
 
@@ -374,44 +498,65 @@ Compares selected regions of two Strings.
 String a = "HelloJava";
 String b = "Java";
 
-System.out.println(a.regionMatches(5, b, 0, 4)); // true
+System.out.println(a.regionMatches(5, b, 0, 4));
+
+
+Output: true
 
 8. Extracting and Modifying Strings
 
-Strings are immutable, so these methods return results instead of changing the original String.
+Important: String methods return results. They do not modify the original String object.
 
 8.1 substring()
 String s = "Programming";
 
-System.out.println(s.substring(3));    // gramming
-System.out.println(s.substring(0, 7)); // Program
+System.out.println(s.substring(3));
+System.out.println(s.substring(0, 7));
+
+
+Output:
+
+gramming
+Program
 
 
 Remember:
 
 Start index is inclusive.
 End index is exclusive.
-Invalid ranges throw IndexOutOfBoundsException.
+Invalid indices throw IndexOutOfBoundsException.
 8.2 replace()
 String s = "banana";
 
-System.out.println(s.replace('a', 'o')); // bonono
-System.out.println(s.replace("na", "NA")); // baNANA
+System.out.println(s.replace('a', 'o'));
+System.out.println(s.replace("na", "NA"));
+
+
+Output:
+
+bonono
+baNANA
+
+
+replace() performs literal replacement.
 
 8.3 replaceAll()
 String s = "Java123Programming456";
 
 System.out.println(s.replaceAll("\\d", ""));
-// JavaProgramming
 
 
-replaceAll() uses regular expressions.
+Output: JavaProgramming
+
+replaceAll() uses a regular expression.
 
 8.4 replaceFirst()
 String s = "one two one";
 
 System.out.println(s.replaceFirst("one", "three"));
-// three two one
+
+
+Output: three two one
 
 8.5 split()
 String s = "Java,Python,C++";
@@ -430,7 +575,7 @@ Python
 C++
 
 
-The argument is a regular expression.
+The delimiter is a regular expression.
 
 To split on a literal dot:
 
@@ -441,10 +586,13 @@ To preserve trailing empty elements:
 
 String[] parts = "a,b,,".split(",", -1);
 
-8.6 Remove spaces
+8.6 Removing Spaces
 String s = "J a v a";
 
-System.out.println(s.replace(" ", "")); // Java
+System.out.println(s.replace(" ", ""));
+
+
+Output: Java
 
 9. String Conversion
 9.1 String.valueOf()
@@ -455,13 +603,16 @@ int age = 21;
 double price = 99.5;
 boolean active = true;
 
-String a = String.valueOf(age);
-String b = String.valueOf(price);
-String c = String.valueOf(active);
+System.out.println(String.valueOf(age));
+System.out.println(String.valueOf(price));
+System.out.println(String.valueOf(active));
 
-System.out.println(a); // 21
-System.out.println(b); // 99.5
-System.out.println(c); // true
+
+Output:
+
+21
+99.5
+true
 
 9.2 Integer.parseInt()
 
@@ -469,42 +620,58 @@ Converts numeric text into an integer.
 
 String s = "123";
 
-int n = Integer.parseInt(s);
+int number = Integer.parseInt(s);
 
-System.out.println(n + 10); // 133
+System.out.println(number + 10);
 
+
+Output: 133
 
 Invalid numeric text throws NumberFormatException.
 
-9.3 String to character array
+9.3 String to Character Array
 String s = "Java";
+
 char[] arr = s.toCharArray();
 
-9.4 Character array to String
+for (char ch : arr) {
+    System.out.println(ch);
+}
+
+9.4 Character Array to String
 char[] arr = {'C', 'o', 'd', 'e'};
 
 String s = new String(arr);
 
-System.out.println(s); // Code
+System.out.println(s);
+
+
+Output: Code
 
 9.5 String.join()
 String result = String.join("-", "2026", "10", "10");
 
-System.out.println(result); // 2026-10-10
+System.out.println(result);
+
+
+Output: 2026-10-10
 
 9.6 String.format()
 String name = "Ravi";
 int age = 21;
 
-String result = String.format("Name: %s, Age: %d", name, age);
+String result = String.format(
+    "Name: %s, Age: %d",
+    name,
+    age
+);
 
 System.out.println(result);
-// Name: Ravi, Age: 21
 
 
-Common format specifiers:
+Output: Name: Ravi, Age: 21
 
-Specifier	Meaning
+Format Specifier	Meaning
 %s	String representation
 %d	Decimal integer
 %f	Floating-point number
@@ -513,23 +680,27 @@ Specifier	Meaning
 %b	Boolean
 %n	Platform-specific newline
 10. StringBuilder
-10.1 What is StringBuilder?
+10.1 What Is StringBuilder?
 
 StringBuilder is a mutable sequence of characters.
 
-Unlike String, it allows modifications without creating a new builder for every operation.
+Unlike String, StringBuilder allows its contents to be modified without creating a new builder for every operation.
 
+Example
 StringBuilder sb = new StringBuilder("Java");
 
 sb.append(" Programming");
 
-System.out.println(sb); // Java Programming
+System.out.println(sb);
 
-Why use StringBuilder?
+
+Output: Java Programming
+
+10.2 Why Use StringBuilder?
 
 Repeated String concatenation can create many intermediate objects.
 
-Less efficient for large repeated appends:
+Less suitable for repeated appends:
 
 String result = "";
 
@@ -548,18 +719,18 @@ for (int i = 0; i < 10000; i++) {
 
 String result = sb.toString();
 
-10.2 Creating StringBuilder
+10.3 Creating StringBuilder Objects
 StringBuilder sb1 = new StringBuilder();
 StringBuilder sb2 = new StringBuilder("Java");
 StringBuilder sb3 = new StringBuilder(100);
 
-
-The integer argument specifies initial capacity, not length. The default capacity of the no-argument constructor is commonly 16.
-
-10.3 Important StringBuilder methods
+The no-argument constructor commonly starts with capacity 16.
+The String constructor initializes the builder with the supplied text.
+The integer constructor specifies the initial capacity, not the length.
+10.4 Important StringBuilder Methods
 Method	Description
 append(x)	Adds text at the end
-insert(index, x)	Inserts text at an index
+insert(index, x)	Inserts text
 replace(start, end, str)	Replaces a range
 delete(start, end)	Deletes a range
 deleteCharAt(index)	Deletes one UTF-16 code unit
@@ -575,23 +746,29 @@ substring(start, end)	Returns a String range
 indexOf(str)	Finds the first occurrence
 lastIndexOf(str)	Finds the last occurrence
 toString()	Converts to String
-10.4 append()
+10.5 append()
 StringBuilder sb = new StringBuilder("Hello");
 
 sb.append(" ");
 sb.append("World");
 sb.append(123);
 
-System.out.println(sb); // Hello World123
+System.out.println(sb);
 
-10.5 insert()
+
+Output: Hello World123
+
+10.6 insert()
 StringBuilder sb = new StringBuilder("Java");
 
 sb.insert(0, "Learn ");
 
-System.out.println(sb); // Learn Java
+System.out.println(sb);
 
-10.6 replace()
+
+Output: Learn Java
+
+10.7 replace()
 
 The end index is exclusive.
 
@@ -599,93 +776,128 @@ StringBuilder sb = new StringBuilder("Hello World");
 
 sb.replace(6, 11, "Java");
 
-System.out.println(sb); // Hello Java
+System.out.println(sb);
 
-10.7 delete()
+
+Output: Hello Java
+
+10.8 delete()
 StringBuilder sb = new StringBuilder("Hello World");
 
 sb.delete(5, 11);
 
-System.out.println(sb); // Hello
+System.out.println(sb);
 
-10.8 deleteCharAt()
+
+Output: Hello
+
+10.9 deleteCharAt()
 StringBuilder sb = new StringBuilder("Hello");
 
 sb.deleteCharAt(1);
 
-System.out.println(sb); // Hllo
+System.out.println(sb);
 
-10.9 reverse()
+
+Output: Hllo
+
+10.10 reverse()
 StringBuilder sb = new StringBuilder("Java");
 
 sb.reverse();
 
-System.out.println(sb); // avaJ
+System.out.println(sb);
 
-10.10 setCharAt()
+
+Output: avaJ
+
+10.11 setCharAt()
 StringBuilder sb = new StringBuilder("Java");
 
 sb.setCharAt(0, 'L');
 
-System.out.println(sb); // Lava
+System.out.println(sb);
 
-10.11 capacity()
+
+Output: Lava
+
+10.12 capacity()
 StringBuilder sb = new StringBuilder();
 
-System.out.println(sb.length());   // 0
-System.out.println(sb.capacity()); // Commonly 16
+System.out.println(sb.length());
+System.out.println(sb.capacity());
 
 
-Length is the number of characters stored. Capacity is the available storage before growth is needed.
+Output:
 
-10.12 ensureCapacity()
+0
+16
+
+
+The default capacity is commonly 16.
+
+Length: Number of characters stored.
+Capacity: Available storage before growth is required.
+10.13 ensureCapacity()
 StringBuilder sb = new StringBuilder();
 
 sb.ensureCapacity(100);
 
-System.out.println(sb.capacity() >= 100); // true
+System.out.println(sb.capacity() >= 100);
 
-10.13 setLength()
+
+Output: true
+
+10.14 setLength()
 StringBuilder sb = new StringBuilder("Hello");
 
 sb.setLength(3);
 
-System.out.println(sb); // Hel
+System.out.println(sb);
 
 
-Increasing the length fills new positions with '\u0000'.
+Output: Hel
 
-10.14 Convert StringBuilder to String
+Increasing the length fills new positions with the null character '\u0000'.
+
+10.15 Convert StringBuilder to String
 StringBuilder sb = new StringBuilder("Java");
 
 String result = sb.toString();
 
-System.out.println(result); // Java
+System.out.println(result);
 
-Important points
-StringBuilder is mutable.
-StringBuilder is not synchronized.
-It is generally preferred for repeated modifications in a single thread.
-It inherits identity-based equals() behavior rather than comparing contents.
+
+Output: Java
+
+Important StringBuilder Points
+Mutable: Contents can be modified.
+Not synchronized: Not thread-safe for concurrent unsynchronized access.
+Efficient: Generally preferred for repeated text construction in one thread.
+Equality: Does not override equals() to compare character contents.
 11. StringBuffer
-11.1 What is StringBuffer?
+11.1 What Is StringBuffer?
 
-StringBuffer is a mutable character sequence similar to StringBuilder.
+StringBuffer is a mutable sequence of characters, similar to StringBuilder.
 
-Its methods are synchronized, allowing individual operations to be thread-safe.
+Its methods are synchronized, making individual operations thread-safe.
 
+Example
 StringBuffer sb = new StringBuffer("Hello");
 
 sb.append(" World");
 
-System.out.println(sb); // Hello World
+System.out.println(sb);
 
-11.2 Creating StringBuffer
+
+Output: Hello World
+
+11.2 Creating StringBuffer Objects
 StringBuffer sb1 = new StringBuffer();
 StringBuffer sb2 = new StringBuffer("Java");
 StringBuffer sb3 = new StringBuffer(100);
 
-11.3 Important methods
+11.3 Important StringBuffer Methods
 
 StringBuffer provides methods similar to StringBuilder:
 
@@ -702,60 +914,74 @@ capacity()
 ensureCapacity()
 setLength()
 toString()
-11.4 Example
+Example
 StringBuffer sb = new StringBuffer("Java");
 
 sb.append(" Language");
 sb.insert(0, "Learn ");
 sb.replace(0, 5, "Study");
 
-System.out.println(sb); // Study Java Language
+System.out.println(sb);
 
-11.5 Why use StringBuffer?
 
-Use StringBuffer when a mutable character sequence is shared between threads and synchronized individual operations are appropriate.
+Output: Study Java Language
 
-However, synchronized methods do not automatically make an entire sequence of multiple operations atomic.
+11.4 Why Use StringBuffer?
 
-For ordinary single-threaded code, StringBuilder is usually preferred.
+Use StringBuffer when:
+
+A mutable character sequence is shared between threads.
+Synchronized individual operations are useful.
+An external synchronization strategy is not already sufficient.
+
+Important: Synchronization of individual methods does not automatically make an entire sequence of multiple operations atomic.
+
+For ordinary single-threaded text building, StringBuilder is usually preferred.
 
 12. String vs StringBuilder vs StringBuffer
 Feature	String	StringBuilder	StringBuffer
 Mutability	Immutable	Mutable	Mutable
-Modification	Returns new results	Modifies builder	Modifies buffer
-Synchronized methods	Not needed for immutable contents	No	Yes
+Modification	Returns results	Modifies builder	Modifies buffer
+Synchronization	Not required for immutable contents	No	Synchronized methods
 Repeated appends	Often less suitable in loops	Usually preferred	Synchronization adds overhead
-equals()	Compares text	Identity-based	Identity-based
-Typical use	Text values	Single-threaded text construction	Shared mutable text with synchronized operations
-Equality example
+equals()	Compares contents	Identity-based	Identity-based
+Typical usage	Normal text	Single-threaded text construction	Shared mutable text with synchronized operations
+Equality Example
 String a = new String("Java");
 String b = new String("Java");
 
-System.out.println(a.equals(b)); // true
+System.out.println(a.equals(b));
 
 StringBuilder x = new StringBuilder("Java");
 StringBuilder y = new StringBuilder("Java");
 
-System.out.println(x.equals(y)); // false
-System.out.println(x.toString().equals(y.toString())); // true
+System.out.println(x.equals(y));
+System.out.println(x.toString().equals(y.toString()));
 
-Which should you use?
-Use String for ordinary text values.
-Use StringBuilder for repeated text modifications in a single thread.
-Use StringBuffer when synchronized mutable operations are specifically needed.
-13. Memory and Performance
-13.1 String concatenation
+
+Output:
+
+true
+false
+true
+
+Which One Should You Use?
+String: For ordinary text values.
+StringBuilder: For repeated modifications in a single thread.
+StringBuffer: When synchronized mutable operations are specifically needed.
+13. Memory Management and Performance
+13.1 String Concatenation
 String a = "Hello";
 String b = "World";
 
 String result = a + " " + b;
 
 
-Java compilers can optimize concatenation expressions. Not every + operation necessarily creates a separate intermediate String.
+Java compilers can optimize concatenation expressions. Therefore, not every + operation necessarily creates a separate intermediate String.
 
-However, repeatedly concatenating Strings inside loops can cause avoidable allocations.
+However, repeated concatenation in loops can still create avoidable allocations.
 
-13.2 Performance example
+13.2 StringBuilder Performance
 StringBuilder sb = new StringBuilder();
 
 for (int i = 0; i < 10000; i++) {
@@ -765,47 +991,59 @@ for (int i = 0; i < 10000; i++) {
 String result = sb.toString();
 
 
-This usually reduces repeated allocation compared with accumulating a String using += in every iteration.
+This usually reduces repeated allocations compared with accumulating a String using += on every iteration.
 
-13.3 Capacity growth
+13.3 Capacity Growth
 
-A commonly used growth formula in standard OpenJDK implementations is:
+A commonly used growth rule in standard OpenJDK implementations is:
 
 newCapacity = oldCapacity * 2 + 2
 
 
-The implementation may allocate more when the required minimum capacity is larger. Treat this as an implementation detail rather than a universal JVM guarantee.
+The implementation may allocate more if the required minimum capacity is larger.
+
+Note: This is an implementation detail, not a universal guarantee for every JVM.
 
 13.4 Compact Strings
 
-Since Java 9, common OpenJDK implementations use Compact Strings, storing eligible text using a byte array and an encoding indicator.
+Since Java 9, common OpenJDK implementations use Compact Strings internally.
 
-Latin-1-compatible content can use one byte per code unit; other content may require UTF-16 storage.
+Eligible text can use a byte array with an encoding indicator:
 
-This is an implementation optimization, not a requirement for every JVM implementation.
+Latin-1-compatible text can use one byte per code unit.
+Other text may require UTF-16 storage.
+
+This is an implementation optimization, not a requirement for every Java implementation.
 
 14. Unicode and Characters
-14.1 What is char?
+14.1 What Is char?
 
-A Java char represents one UTF-16 code unit.
+A Java char represents a single UTF-16 code unit.
 
 char ch = 'A';
 
 
 A supplementary Unicode character can require two UTF-16 code units.
 
-14.2 Unicode example
+14.2 Unicode Example
 String emoji = "😀";
 
-System.out.println(emoji.length()); // 2
+System.out.println(emoji.length());
+
 System.out.println(
     emoji.codePointCount(0, emoji.length())
-); // 1
+);
 
 
-The String length counts UTF-16 code units, while codePointCount() counts Unicode code points.
+Output:
 
-14.3 Iterate over Unicode code points
+2
+1
+
+
+length() counts UTF-16 code units, while codePointCount() counts Unicode code points.
+
+14.3 Iterating over Code Points
 String s = "A😀B";
 
 s.codePoints().forEach(cp ->
@@ -813,7 +1051,7 @@ s.codePoints().forEach(cp ->
 );
 
 
-A code point is not always the same as a user-perceived character. Some visible characters consist of multiple code points.
+A Unicode code point is not always the same as a user-perceived character. Some visible characters consist of multiple code points.
 
 15. Common String Programs
 15.1 Reverse a String
@@ -824,7 +1062,10 @@ static String reverse(String s) {
 
 Example:
 
-System.out.println(reverse("Java")); // avaJ
+System.out.println(reverse("Java"));
+
+
+Output: avaJ
 
 15.2 Check Palindrome
 
@@ -849,13 +1090,19 @@ static boolean isPalindrome(String s) {
 
 Example:
 
-System.out.println(isPalindrome("madam")); // true
-System.out.println(isPalindrome("hello")); // false
+System.out.println(isPalindrome("madam"));
+System.out.println(isPalindrome("hello"));
+
+
+Output:
+
+true
+false
 
 
 This version is case-sensitive and compares UTF-16 code units.
 
-15.3 Count vowels
+15.3 Count Vowels
 static int countVowels(String s) {
     int count = 0;
 
@@ -871,7 +1118,7 @@ static int countVowels(String s) {
     return count;
 }
 
-15.4 Character frequency
+15.4 Character Frequency
 import java.util.HashMap;
 import java.util.Map;
 
@@ -913,12 +1160,14 @@ static boolean areAnagrams(String a, String b) {
 
 Example:
 
-System.out.println(areAnagrams("listen", "silent")); // true
+System.out.println(areAnagrams("listen", "silent"));
 
+
+Output: true
 
 This implementation is case-sensitive and treats spaces as characters.
 
-15.6 Remove duplicate characters
+15.6 Remove Duplicate Characters
 static String removeDuplicates(String s) {
     StringBuilder result = new StringBuilder();
     boolean[] seen = new boolean[65536];
@@ -939,12 +1188,13 @@ static String removeDuplicates(String s) {
 Example:
 
 System.out.println(removeDuplicates("programming"));
-// progamin
 
 
-This preserves first occurrence order and works with UTF-16 code units.
+Output: progamin
 
-15.7 Count words
+This preserves first-occurrence order and works with UTF-16 code units.
+
+15.7 Count Words
 static int countWords(String s) {
     String trimmed = s.trim();
 
@@ -958,21 +1208,24 @@ static int countWords(String s) {
 
 Example:
 
-System.out.println(countWords("Java is very useful")); // 4
+System.out.println(countWords("Java is very useful"));
+
+
+Output: 4
 
 16. Interview Questions
-Beginner
+Beginner-Level Questions
 What is a String in Java?
 Why is String immutable?
 What is the difference between String and char[]?
 What is the difference between == and equals()?
 What is the String Constant Pool?
-What does intern() do?
+What is the purpose of intern()?
 How does length() work?
 What is the difference between isEmpty() and isBlank()?
 What is the difference between trim() and strip()?
-How do you convert a String to a character array?
-Intermediate
+How do you convert a String into a character array?
+Intermediate-Level Questions
 What is the difference between substring() and subSequence()?
 What is the difference between replace() and replaceAll()?
 What is the difference between indexOf() and lastIndexOf()?
@@ -980,10 +1233,10 @@ Why is StringBuilder useful for repeated concatenation?
 What is the difference between StringBuilder and StringBuffer?
 What is the difference between append() and insert()?
 What is the difference between length() and capacity()?
-Why does StringBuilder's equals() not compare contents?
+Why does StringBuilder's equals() not compare text?
 How do you split a String using a delimiter?
 How do you reverse a String?
-Advanced
+Advanced-Level Questions
 How does String immutability improve security?
 What are the limitations of char for Unicode?
 What is the difference between UTF-16 code units and Unicode code points?
@@ -991,10 +1244,10 @@ What is String interning?
 How does Java optimize String concatenation?
 Do synchronized StringBuffer methods make compound operations atomic?
 How do you compare Strings without considering case?
-How do you compare Strings safely when they may be null?
-What is the difference between a code point and a grapheme cluster?
+How do you safely compare Strings when they may be null?
+What is the difference between a Unicode code point and a grapheme cluster?
 When should you use String, StringBuilder, and StringBuffer?
-Output-based questions
+Output-Based Questions
 Question 1
 String a = "Java";
 String b = "Java";
@@ -1023,28 +1276,27 @@ true
 
 Question 3
 String s = "Hello";
+
 s.concat(" World");
 
 System.out.println(s);
 
 
-Output:
+Output: Hello
 
-Hello
-
-
-The returned String was not assigned.
+Reason: The returned String was not assigned to the variable.
 
 Question 4
 StringBuilder sb = new StringBuilder("Java");
+
 sb.append(" DSA");
 
 System.out.println(sb);
 
 
-Output:
+Output: Java DSA
 
-Java DSA
+Reason: StringBuilder is mutable.
 
 Question 5
 StringBuilder a = new StringBuilder("Java");
@@ -1053,12 +1305,9 @@ StringBuilder b = new StringBuilder("Java");
 System.out.println(a.equals(b));
 
 
-Output:
+Output: false
 
-false
-
-
-StringBuilder inherits identity-based equality behavior from Object.
+Reason: StringBuilder inherits identity-based equality behavior from Object.
 
 Question 6
 String s = "Programming";
@@ -1066,15 +1315,12 @@ String s = "Programming";
 System.out.println(s.substring(0, 4));
 
 
-Output:
+Output: Prog
 
-Prog
-
-
-The start index is inclusive and the end index is exclusive.
+Reason: The start index is inclusive and the end index is exclusive.
 
 17. Common Mistakes
-Mistake 1: Comparing text using ==
+Mistake 1: Comparing String Contents Using ==
 
 Incorrect:
 
@@ -1092,11 +1338,12 @@ if (a.equals(b)) {
 
 Use Objects.equals(a, b) when either reference may be null.
 
-Mistake 2: Assuming String methods modify the original String
+Mistake 2: Assuming String Methods Modify the Original String
 
 Incorrect:
 
 String s = "java";
+
 s.toUpperCase();
 
 
@@ -1108,10 +1355,12 @@ Mistake 3: Confusing length() and length
 String s = "Java";
 char[] arr = {'J', 'a', 'v', 'a'};
 
-System.out.println(s.length()); // String method
-System.out.println(arr.length); // Array field
+System.out.println(s.length());
+System.out.println(arr.length);
 
-Mistake 4: Incorrect dot splitting
+String uses the length() method.
+Arrays use the length field.
+Mistake 4: Incorrect Dot Splitting
 
 Incorrect:
 
@@ -1125,63 +1374,76 @@ String[] parts = "a.b.c".split("\\.");
 
 The dot is a regular-expression metacharacter.
 
-Mistake 5: Confusing capacity and length
+Mistake 5: Confusing Capacity and Length
 StringBuilder sb = new StringBuilder(100);
 
-System.out.println(sb.length());   // 0
-System.out.println(sb.capacity()); // At least 100
+System.out.println(sb.length());
+System.out.println(sb.capacity());
 
-Mistake 6: Assuming StringBuffer makes every sequence atomic
 
-Individual synchronized method calls do not automatically make a sequence of multiple calls atomic.
+Output:
 
-Mistake 7: Forgetting exclusive end indices
+0
+100
+
+Mistake 6: Assuming StringBuffer Makes Every Sequence Atomic
+
+Individual synchronized method calls do not automatically make multiple method calls atomic as a group.
+
+Mistake 7: Forgetting That the End Index Is Exclusive
 String s = "Programming";
 
-System.out.println(s.substring(0, 4)); // Prog
+System.out.println(s.substring(0, 4));
 
-Mistake 8: Treating every Unicode character as one char
 
-Some characters require two UTF-16 code units, and some visible characters consist of multiple code points.
+Output: Prog
+
+Mistake 8: Treating Every Unicode Character as One char
+
+Some Unicode characters require two UTF-16 code units, and some visible characters consist of multiple code points.
 
 18. Quick Revision
-Concept	Remember
+Concept	Important Point
 String	Immutable text
 String literal	Can use the String Constant Pool
 new String()	Creates a distinct object
-==	Reference identity
-equals()	String content comparison
+==	Compares reference identity
+equals()	Compares String contents
 intern()	Returns the canonical pooled String
-length()	Number of UTF-16 code units
+length()	Counts UTF-16 code units
 substring(a, b)	Start inclusive, end exclusive
 replace()	Literal replacement
-replaceAll()	Regex replacement
-split()	Regex-based splitting
+replaceAll()	Regular-expression replacement
+split()	Splits using a regular expression
 StringBuilder	Mutable and unsynchronized
 StringBuffer	Mutable with synchronized methods
 append()	Adds text at the end
 insert()	Inserts text at an index
 delete()	Removes a range
 reverse()	Reverses the sequence
-capacity()	Available character storage
+capacity()	Available storage capacity
 toString()	Returns a String representation
-Unicode code point	A Unicode character value
+Unicode code point	A Unicode code point value
 Grapheme cluster	A user-perceived character unit
-Recommended learning order
-String creation and immutability.
-String Constant Pool and == vs equals().
-All important String methods.
-Searching, substring, replacement, and splitting.
-StringBuilder and its methods.
-StringBuffer and synchronization.
-Memory, performance, and Unicode.
-String coding problems and interview questions.
-Final Notes
-Use String for ordinary text.
-Use StringBuilder for repeated modifications in a single thread.
-Use StringBuffer when synchronized mutable operations are required.
-Use .equals() for String content comparison.
-Specify a charset when converting bytes to text.
-Use Java 11 or later for isBlank(), strip(), and repeat().
+🎯 Recommended Learning Order
+String Creation and Immutability
+String Constant Pool
+== vs equals()
+Important String Methods
+Searching, Substring, Replacement, and Splitting
+StringBuilder and Its Methods
+StringBuffer and Synchronization
+Memory Management and Performance
+Unicode and Character Handling
+String Coding Problems and Interview Questions
+Conclusion
 
-Mastering these concepts will help with Java interviews, DSA problems, and real-world Java development.
+To master Java Strings, focus on these three concepts:
+
+String: Immutable and ideal for ordinary text.
+StringBuilder: Mutable and generally preferred for repeated modifications in a single thread.
+StringBuffer: Mutable with synchronized methods for appropriate concurrent use cases.
+
+Understanding these concepts will help you solve Java interview questions, DSA problems, and real-world programming tasks.
+
+Happy Coding! ☕
